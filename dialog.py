@@ -887,6 +887,8 @@ class Dialog:
         for t in fields:
             label = t[0]
             item = t[1]
+            if item is None:
+                item = ""
             field_len = str(t[2])
             if len(t) < 4:
                 input_len = field_len

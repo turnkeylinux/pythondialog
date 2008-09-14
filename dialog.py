@@ -217,6 +217,7 @@ _common_args_syntax = {
     "help": lambda enable: _simple_option("--help", enable),
     "help_button": lambda enable: _simple_option("--help-button", enable),
     "help_label": lambda string: ("--help-label", string),
+    "insecure": lambda enable: _simple_option("--insecure", enable),
     "ignore": lambda enable: _simple_option("--ignore", enable),
     "item_help": lambda enable: _simple_option("--item-help", enable),
     "max_input": lambda size: ("--max-input", str(size)),
@@ -466,6 +467,7 @@ class Dialog:
     add_persistent_args
     calendar
     checklist
+    form
     fselect
 
     gauge_start
@@ -477,6 +479,7 @@ class Dialog:
     menu
     msgbox
     passwordbox
+    passwordform
     radiolist
     scrollbox
     tailbox
@@ -845,6 +848,116 @@ class Dialog:
 
 	"""
 	self._perform_no_options('--clear')
+
+
+    def form(self, text, height=20, width=50, form_height=20, fields=[], **kwargs):
+        """Display a form dialog box.
+        
+        text        -- text to display in the box
+        height      -- height of the box (minus the calendar height)
+        width       -- width of the box
+        form_height -- height of the form
+        fields      -- a list of tuples, each tuple has the form:
+                      (label, item, len) or
+                      (label, item, field_len, input_len)
+
+        it returns a tuple of the form (code, results), where results is a 
+        list of the results.
+
+        Notable exceptions:
+            - any exception raised by self._perform()
+            - UnexpectedDialogOutput
+            - PythonDialogReModuleError
+
+	"""
+        cmd = ["--form", text, str(height), str(width), str(form_height)]
+
+        # find the longest label so we can put the input boxes at the
+        # correct offset
+        max_label_len = 0
+        for t in fields:
+            if len(t[0]) > max_label_len:
+                max_label_len = len(t[0]);
+                    
+                
+    
+        print "max_label_len == ", max_label_len
+
+        line = 1
+        for t in fields:
+            label = t[0]
+            item = t[1]
+            field_len = str(t[2])
+            if len(t) < 4:
+                input_len = field_len
+            else:
+                input_len = str(t[3])
+            cmd.extend(((label, str(line), "1", item, str(line), str(max_label_len + 2), field_len, input_len)))
+            line += 1
+
+        (code, output) = self._perform(*(cmd,), **kwargs)
+
+        if output:
+            return (code, string.split(output, '\n')[:-1])
+        else:                           # empty selection
+            return (code, [])
+
+
+    def passwordform(self, text, height=20, width=50, form_height=20, fields=[], **kwargs):
+        """Display a form dialog box.
+        
+        text        -- text to display in the box
+        height      -- height of the box (minus the calendar height)
+        width       -- width of the box
+        form_height -- height of the form
+        fields      -- a list of tuples, each tuple has the form:
+                      (label, item, len) or
+                      (label, item, field_len, input_len)
+
+        it returns a tuple of the form (code, results), where results is a 
+        list of the results.
+
+        Notable exceptions:
+            - any exception raised by self._perform()
+            - UnexpectedDialogOutput
+            - PythonDialogReModuleError
+
+	"""
+        cmd = ["--passwordform", text, str(height), str(width), str(form_height)]
+
+        # find the longest label so we can put the input boxes at the
+        # correct offset
+        max_label_len = 0
+        for t in fields:
+            if len(t[0]) > max_label_len:
+                max_label_len = len(t[0]);
+                    
+                
+    
+        print "max_label_len == ", max_label_len
+
+        line = 1
+        for t in fields:
+            label = t[0]
+            item = t[1]
+            field_len = str(t[2])
+            if len(t) < 4:
+                input_len = field_len
+            else:
+                input_len = str(t[3])
+            cmd.extend(((label, str(line), "1", item, str(line), str(max_label_len + 2), field_len, input_len)))
+            line += 1
+
+        # typing in password without stars is really awkward
+        kwargs["insecure"] = True
+
+        (code, output) = self._perform(*(cmd,), **kwargs)
+
+        if output:
+            return (code, string.split(output, '\n')[:-1])
+        else:                           # empty selection
+            return (code, [])
+            
 
     def calendar(self, text, height=6, width=0, day=0, month=0, year=0,
                  **kwargs):

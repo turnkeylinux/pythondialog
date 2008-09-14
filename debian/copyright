@@ -11,6 +11,10 @@ Upstream Author: Peter Astrand <peter@cendio.se>
 Copyright: (C) 2000  Robb Shecter, Sultanbek Tezadov
            (C) 2002, 2003, 2004  Florent Rougon
 
+Patched by Alon Swartz <alon@turnkeylinux.org> and integrated patch
+available from http://pythondialog.sourceforge.net authored by
+Chris Dew <chrisdew@users.sourceforge.net>
+
 License:
 
     This package is free software; you can redistribute it and/or

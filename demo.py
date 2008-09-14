@@ -159,6 +159,36 @@ def checklist_demo(d):
     return tag
 
 
+def form_demo(d):
+    while 1:
+        (code, tag) = d.form(text="Which are your favourites?",
+                             height=15, width=54, form_height=7, 
+                             fields=[("Colour", "", 10, 30),
+                                     ("Rugby Team", "", 20),
+                                     ("Car", "", 20),
+                                     ("Celebrity", "", 20)],
+                             title="A demo of the form dialog.",
+                             backtitle="And now, for something "
+                                "completely different...")
+        if handle_exit_code(d, code):
+            break
+    return tag
+
+
+def passwordform_demo(d):
+    while 1:
+        (code, tag) = d.passwordform(text="Set your password",
+                                     height=15, width=54, form_height=7, 
+                                     fields=[("Admin Password:", "", 10, 20),
+                                             ("       Confirm:", "", 10, 20)],
+                                     title="A demo of the passwordform dialog.",
+                                     backtitle="And now, for something "
+                                        "completely different...")
+        if handle_exit_code(d, code):
+            break
+    return tag
+
+
 def radiolist_demo(d):    
     while 1:
         (code, tag) = d.radiolist(
@@ -217,8 +247,8 @@ other people with your pronostics... ;-)"""
         return "Hey, you're a troll! (or do you know Debian *so* well? ;-)"
 
 
-def scrollbox_demo(d, name, favorite_day, toppings, sandwich, date,
-                   password):
+def scrollbox_demo(d, name, favorite_day, toppings, favourites, passwords, 
+                   sandwich, date, password):
     day, month, year = date
     msg = """\
 Here are some vital statistics about you:
@@ -226,6 +256,8 @@ Here are some vital statistics about you:
 Name: %s
 Favorite day of the week: %s
 Favorite sandwich toppings:%s
+Favorites:%s
+Passwords:%s
 Favorite sandwich: %s
 
 You estimate Debian sarge's release to happen around %04u-%02u-%02u.
@@ -234,6 +266,8 @@ You estimate Debian sarge's release to happen around %04u-%02u-%02u.
 Your root password is: ************************** (looks good!)""" \
      % (name, favorite_day,
         string.join([''] + toppings, "\n    "),
+        string.join([] + favourites, ", "),
+        string.join([] + passwords, ", confirmed "), 
         sandwich, year, month, day,
         comment_on_sarge_release_date(day, month, year))
     d.scrollbox(msg, height=20, width=75, title="Great Report of the Year")
@@ -281,10 +315,12 @@ def demo():
     name = inputbox_demo(d)
     favorite_day = menu_demo(d)
     toppings = checklist_demo(d)
+    favourites = form_demo(d)
+    passwords = passwordform_demo(d)
     sandwich = radiolist_demo(d)
     date = calendar_demo(d)
     password = passwordbox_demo(d)
-    scrollbox_demo(d, name, favorite_day, toppings, sandwich, date, password)
+    scrollbox_demo(d, name, favorite_day, toppings, favourites, passwords, sandwich, date, password)
 
     d.scrollbox("""\
 Haha. You thought it was over. Wrong. Even More fun is to come!

@@ -1,0 +1,15 @@
+Metadata-Version: 1.0
+Name: pythondialog
+Version: 2.7
+Summary: A Python interface to the UNIX dialog utility and mostly-compatible programs
+Home-page: http://pythondialog.sourceforge.net/
+Author: Peter Astrand
+Author-email: peter@cendio.se
+License: LGPL
+Description: A Python interface to the UNIX dialog utility, designed to provide
+        an easy, pythonic and as complete as possible way to use the dialog
+        features from Python code.
+        Back-end programs that are almost compatible with dialog are also
+        supported if someone cares about them.
+Keywords: dialog,Xdialog,whiptail,text-mode interface
+Platform: UNIX

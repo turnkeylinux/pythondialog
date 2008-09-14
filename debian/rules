@@ -1,0 +1,48 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+DESTDIR = $(CURDIR)/debian/python-dialog
+PATHTOMODULE = /usr/share/python-support/python-dialog/dialog.py
+
+build:
+
+clean:
+	dh_testdir
+	dh_testroot
+	find . -name \*.pyc | xargs rm -f
+	rm -rf build/ dialog.html
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	python setup.py install --root=$(DESTDIR) --prefix=/usr
+	# generate python documentation
+	pydoc -w dialog
+	# Fix path to sources
+	sed -i 's!<a href="file:/.*">.*</a>!<a href="file:$(PATHTOMODULE)">$(PATHTOMODULE)</a>!' dialog.html
+	# Install it
+	install -D dialog.html $(DESTDIR)/usr/share/doc/python-dialog/pydoc.html
+
+binary-indep: build install
+	dh_testdir -i
+	dh_testroot -i
+	dh_installchangelogs -i
+	dh_installdocs -i
+	dh_installexamples -i
+	dh_pysupport -i
+	dh_link -i
+	dh_compress -i -Xdemo.py -Xpydoc.html
+	dh_fixperms -i
+	dh_installdeb -i 
+	dh_gencontrol -i
+	dh_md5sums -i
+	dh_builddeb -i
+
+binary-arch: build install
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

@@ -1,0 +1,5 @@
+pythondialog (2.7-1) unstable; urgency=low
+
+  * Initial release (Closes: #402453).
+
+ -- Adam Cécile (Le_Vert) <gandalf@le-vert.net>  Sun, 10 Dec 2006 16:30:10 +0100

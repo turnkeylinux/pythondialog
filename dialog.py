@@ -209,6 +209,7 @@ _common_args_syntax = {
     # Warning: order = y, x!
     "begin": lambda coords: ("--begin", str(coords[0]), str(coords[1])),
     "cancel": lambda string: ("--cancel-label", string),
+    "cancel_label": lambda string: ("--cancel-label", string),
     "clear": lambda enable: _simple_option("--clear", enable),
     "cr_wrap": lambda enable: _simple_option("--cr-wrap", enable),
     "create_rc": lambda file: ("--create-rc", file),

@@ -880,10 +880,6 @@ class Dialog:
             if len(t[0]) > max_label_len:
                 max_label_len = len(t[0]);
                     
-                
-    
-        print "max_label_len == ", max_label_len
-
         line = 1
         for t in fields:
             label = t[0]
@@ -935,10 +931,6 @@ class Dialog:
             if len(t[0]) > max_label_len:
                 max_label_len = len(t[0]);
                     
-                
-    
-        print "max_label_len == ", max_label_len
-
         line = 1
         for t in fields:
             label = t[0]

@@ -1420,6 +1420,9 @@ class Dialog:
             any exception raised by self._perform()
 
 	"""
+
+        # typing in password without stars is really awkward
+        kwargs["insecure"] = True
 	(code, password) = self._perform(
             *(["--passwordbox", text, str(height), str(width), init],),
             **kwargs)

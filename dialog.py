@@ -226,6 +226,7 @@ _common_args_syntax = {
     "no_cancel": lambda enable: _simple_option("--no-cancel", enable),
     "nocancel": lambda enable: _simple_option("--nocancel", enable),
     "no_shadow": lambda enable: _simple_option("--no-shadow", enable),
+    "no_label": lambda string: ("--no-label", string),
     "ok_label": lambda string: ("--ok-label", string),
     "print_maxsize": lambda enable: _simple_option("--print-maxsize",
                                                    enable),
@@ -245,7 +246,8 @@ _common_args_syntax = {
     "timeout": lambda secs: ("--timeout", str(secs)),
     "title": lambda title: ("--title", title),
     "trim": lambda enable: _simple_option("--trim", enable),
-    "version": lambda enable: _simple_option("--version", enable)}
+    "version": lambda enable: _simple_option("--version", enable),
+    "yes_label": lambda string: ("--yes-label", string)}
     
 
 def _simple_option(option, enable):

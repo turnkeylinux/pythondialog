@@ -211,6 +211,7 @@ _common_args_syntax = {
     "cancel": lambda string: ("--cancel-label", string),
     "cancel_label": lambda string: ("--cancel-label", string),
     "clear": lambda enable: _simple_option("--clear", enable),
+    "colors": lambda enable: _simple_option("--colors", enable),
     "cr_wrap": lambda enable: _simple_option("--cr-wrap", enable),
     "create_rc": lambda file: ("--create-rc", file),
     "defaultno": lambda enable: _simple_option("--defaultno", enable),

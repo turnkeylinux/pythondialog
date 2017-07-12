@@ -4,8 +4,10 @@ Priority: optional
 Maintainer: Adam Cécile (Le_Vert) <gandalf@le-vert.net>
 Build-Depends:
  debhelper (>= 10),
- python-all,
+ dh-python,
+ python-all (>= 2.6.6-3~),
 Standards-Version: 4.0.0
+X-Python-Version: >= 2.6
 
 Package: python-dialog
 Architecture: any

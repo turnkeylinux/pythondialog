@@ -34,5 +34,5 @@ License:
 On Debian systems, the complete text of the GNU Lesser General
 Public License can be found in `/usr/share/common-licenses/LGPL'.
 
-The Debian packaging is (C) 2006, Adam Cécile (Le_Vert) <gandalf@le-vert.net>
+The Debian packaging is Copyright 2006, Adam Cécile (Le_Vert) <gandalf@le-vert.net>
 and is licensed under the GPL, see `/usr/share/common-licenses/GPL'.

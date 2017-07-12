@@ -2,13 +2,20 @@ Source: pythondialog
 Section: python
 Priority: optional
 Maintainer: Adam Cécile (Le_Vert) <gandalf@le-vert.net>
-Build-Depends: debhelper (>= 5.0.37.2), python-all-dev, python-all, python-support (>= 0.4)
+Build-Depends:
+ debhelper (>= 5.0.37.2),
+ python-all,
+ python-all-dev,
+ python-support (>= 0.4),
 Standards-Version: 3.7.2
 
 Package: python-dialog
 Architecture: any
-Depends: ${python:Depends}, dialog
-Provides: ${python:Provides}
+Depends:
+ dialog,
+ ${python:Depends},
+Provides:
+ ${python:Provides},
 Description: Python module for making simple Text/Console-mode user interfaces
  This is a Python module for doing console-mode user interaction.
  .

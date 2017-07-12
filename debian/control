@@ -6,6 +6,7 @@ Build-Depends:
  debhelper (>= 10),
  dh-python,
  python-all (>= 2.6.6-3~),
+Homepage: http://pythondialog.sourceforge.net/
 Standards-Version: 4.0.0
 X-Python-Version: >= 2.6
 
@@ -22,5 +23,3 @@ Description: Python module for making simple Text/Console-mode user interfaces
  .
  It wraps the dialog/Xdialog program, and provides a nice, object-oriented
  programming model.
- .
-  Homepage: http://pythondialog.sourceforge.net/

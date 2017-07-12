@@ -3,10 +3,8 @@ Section: python
 Priority: optional
 Maintainer: Adam Cécile (Le_Vert) <gandalf@le-vert.net>
 Build-Depends:
- debhelper (>= 5.0.37.2),
+ debhelper (>= 10),
  python-all,
- python-all-dev,
- python-support (>= 0.4),
 Standards-Version: 4.0.0
 
 Package: python-dialog

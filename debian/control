@@ -2,17 +2,24 @@ Source: pythondialog
 Section: python
 Priority: optional
 Maintainer: Adam Cécile (Le_Vert) <gandalf@le-vert.net>
-Build-Depends: debhelper (>= 5.0.37.2), python-all-dev, python-all, python-support (>= 0.4)
-Standards-Version: 3.7.2
+Build-Depends:
+ debhelper (>= 10),
+ dh-python,
+ python-all (>= 2.6.6-3~),
+Homepage: http://pythondialog.sourceforge.net/
+Standards-Version: 4.0.0
+X-Python-Version: >= 2.6
 
 Package: python-dialog
 Architecture: any
-Depends: ${python:Depends}, dialog
-Provides: ${python:Provides}
+Depends:
+ dialog,
+ ${misc:Depends},
+ ${python:Depends},
+Provides:
+ ${python:Provides},
 Description: Python module for making simple Text/Console-mode user interfaces
  This is a Python module for doing console-mode user interaction.
  .
  It wraps the dialog/Xdialog program, and provides a nice, object-oriented
  programming model.
- .
-  Homepage: http://pythondialog.sourceforge.net/

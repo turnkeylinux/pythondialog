@@ -1,48 +1,20 @@
-#!/usr/bin/make -f
+#! /usr/bin/make -f
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
+DIALOG_PY = /usr/share/pyshared/dialog.py
 
-DESTDIR = $(CURDIR)/debian/python-dialog
-PATHTOMODULE = /usr/share/python-support/python-dialog/dialog.py
+%:
+	dh $@ --with python2 --buildsystem=pybuild
 
-build:
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -f dialog.html
 
-clean:
-	dh_testdir
-	dh_testroot
-	find . -name \*.pyc | xargs rm -f
-	rm -rf build/ dialog.html
-	dh_clean 
-
-install: build
-	dh_testdir
-	dh_testroot
-	dh_clean -k 
-	python setup.py install --root=$(DESTDIR) --prefix=/usr
-	# generate python documentation
+override_dh_auto_build:
+	dh_auto_build
+	
 	pydoc -w dialog
 	# Fix path to sources
-	sed -i 's!<a href="file:/.*">.*</a>!<a href="file:$(PATHTOMODULE)">$(PATHTOMODULE)</a>!' dialog.html
-	# Install it
-	install -D dialog.html $(DESTDIR)/usr/share/doc/python-dialog/pydoc.html
+	sed -i -e 's!<a href="file:/.*">.*</a>!<a href="file:$(DIALOG_PY)">$(DIALOG_PY)</a>!' dialog.html
 
-binary-indep: build install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs
-	dh_installdocs
-	dh_installexamples
-	dh_pysupport
-	dh_link
+override_dh_compress:
 	dh_compress -Xdemo.py -Xpydoc.html
-	dh_fixperms
-	dh_installdeb
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
-
-binary-arch: build install
-
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install
